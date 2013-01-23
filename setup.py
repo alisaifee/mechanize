@@ -23,6 +23,7 @@ Johnny Lee (MSIE Cookie support) and last but not least Andy Lester
 """
 
 import os
+import sys
 
 VERSION = open(os.path.join("mechanize", "_version.py")).\
     readlines()[0].strip(' "\n')
@@ -62,6 +63,10 @@ Topic :: Text Processing :: Markup :: XML
 """
 
 def main():
+    extra = {}
+    if sys.version_info >= (3,):
+        extra['use_2to3'] = True
+
     try:
         import setuptools
     except ImportError:
@@ -85,6 +90,7 @@ def main():
         download_url = ("http://pypi.python.org/packages/source/m/mechanize/"
                         "mechanize-%s.tar.gz" % VERSION),
         packages = ["mechanize"],
+        **extra
         )
 
 
